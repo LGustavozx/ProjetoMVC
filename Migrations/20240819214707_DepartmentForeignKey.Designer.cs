@@ -11,8 +11,8 @@ using ProjetoEstoqueMVC.Context;
 namespace ProjetoEstoqueMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240813232226_Initial")]
-    partial class Initial
+    [Migration("20240819214707_DepartmentForeignKey")]
+    partial class DepartmentForeignKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,7 +70,7 @@ namespace ProjetoEstoqueMVC.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
@@ -99,7 +99,9 @@ namespace ProjetoEstoqueMVC.Migrations
                 {
                     b.HasOne("ProjetoEstoqueMVC.Models.Department", "Department")
                         .WithMany("Sellers")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Department");
                 });

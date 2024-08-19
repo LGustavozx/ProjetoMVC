@@ -68,7 +68,7 @@ namespace ProjetoEstoqueMVC.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
@@ -97,7 +97,9 @@ namespace ProjetoEstoqueMVC.Migrations
                 {
                     b.HasOne("ProjetoEstoqueMVC.Models.Department", "Department")
                         .WithMany("Sellers")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Department");
                 });

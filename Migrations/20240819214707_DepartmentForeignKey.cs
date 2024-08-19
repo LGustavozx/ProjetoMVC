@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoEstoqueMVC.Migrations
 {
-    public partial class Initial : Migration
+    public partial class DepartmentForeignKey : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,7 @@ namespace ProjetoEstoqueMVC.Migrations
                     Email = table.Column<string>(type: "TEXT", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     BaseSalary = table.Column<double>(type: "REAL", nullable: false),
-                    DepartmentId = table.Column<int>(type: "INTEGER", nullable: true)
+                    DepartmentId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +41,8 @@ namespace ProjetoEstoqueMVC.Migrations
                         name: "FK_Seller_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
